@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity, FlatList} from "react-native";
 import data from '../data.json';
+import { Dimensions } from 'react-native';
 
-const Item = ({ item, onPress, backgroundColor, textColor }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-    <Text style={[styles.title, textColor]}>{item.title}</Text>
-  </TouchableOpacity>
-);
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const fetchData = () => {
 };
@@ -15,9 +13,13 @@ function Screen1({route, navigation}) {
 
   const renderItem = ({ item }) => {
     return (
-      <Text>
+      <TouchableOpacity
+        style = {{width: windowWidth, height: windowHeight / 10}}
+        onPress={() => navigation.navigate('Screen2', {item})}>
+        <Text>
         {item.firstName} {item.lastName}
       </Text>
+      </TouchableOpacity>
     );
   };
 

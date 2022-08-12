@@ -17,7 +17,7 @@ const App = () => {
           options={{ title: 'Screen1' }}
         />
         <Stack.Screen 
-          name="Profile" 
+          name="Screen2" 
           component={Screen2}
           options={{ title: 'Screen2' }} />
       </Stack.Navigator>
