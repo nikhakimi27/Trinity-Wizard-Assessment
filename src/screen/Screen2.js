@@ -1,5 +1,5 @@
-import React, { Component, useState } from "react";
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput } from "react-native";
+import React, { Component, useState, useRef } from "react";
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Button, ScrollView } from "react-native";
 import { Dimensions } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
@@ -13,8 +13,25 @@ function Screen2({ route, navigation }) {
   const [email, onChangeEmail] = useState(item.email);
   const [phone, onChangePhone] = useState(item.phone);
 
+  const refInput2 = useRef();
+  const refInput3 = useRef();
+  const refInput4 = useRef();
+
+  const checkTextInput = () => {
+    console.log(item.firstName)
+    console.log(item.lastName)
+
+    if (onChangeFirstName && onChangeLastName == null) {
+      alert('Please enter first and last name.');
+      return;
+    }
+    else
+      navigation.navigate('Screen1')
+    return;
+  };
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text>
         Main Information
       </Text>
@@ -25,6 +42,8 @@ function Screen2({ route, navigation }) {
             style={{ height: 40, width: windowWidth - 150, margin: 12, borderWidth: 1, padding: 10, }}
             placeholder={item.firstName}
             onChangeText={onChangeFirstName}
+            returnKeyType="next"
+            onSubmitEditing={() => refInput2.current.focus()}
           />
         </View>
         <View style={{ flexDirection: 'row' }}>
@@ -33,6 +52,9 @@ function Screen2({ route, navigation }) {
             style={{ height: 40, width: windowWidth - 150, margin: 12, borderWidth: 1, padding: 10, }}
             placeholder={item.lastName}
             onChangeText={onChangeLastName}
+            returnKeyType="next"
+            onSubmitEditing={() => refInput3.current.focus()}
+            ref={refInput2}
           />
         </View>
         <Text>
@@ -44,6 +66,9 @@ function Screen2({ route, navigation }) {
             style={{ height: 40, width: windowWidth - 150, margin: 12, borderWidth: 1, padding: 10, }}
             placeholder={item.email}
             onChangeText={onChangeEmail}
+            returnKeyType="next"
+            onSubmitEditing={() => refInput4.current.focus()}
+            ref={refInput3}
           />
         </View>
         <View style={{ flexDirection: 'row' }}>
@@ -52,10 +77,15 @@ function Screen2({ route, navigation }) {
             style={{ height: 40, width: windowWidth - 150, margin: 12, borderWidth: 1, padding: 10, }}
             placeholder={item.phone}
             onChangeText={onChangePhone}
+            ref={refInput4}
           />
         </View>
       </View >
-    </View >
+      <Button 
+        title = "Save" 
+        style = {{backgroundColor: 'red'}} 
+        onPress = {checkTextInput}/>
+    </ScrollView >
   );
 }
 

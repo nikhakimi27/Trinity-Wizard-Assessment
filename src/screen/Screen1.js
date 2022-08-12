@@ -14,9 +14,13 @@ function Screen1({route, navigation}) {
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
-        style = {{width: windowWidth, height: windowHeight / 10}}
+        style = {styles.cardContainer}
         onPress={() => navigation.navigate('Screen2', {item})}>
-        <Text>
+        <Image
+        style = {{height: 30, width: 30}}
+        source={require('../asset/orange.png')}
+      />
+        <Text style = {styles.cardName}>
         {item.firstName} {item.lastName}
       </Text>
       </TouchableOpacity>
@@ -30,6 +34,9 @@ function Screen1({route, navigation}) {
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        ItemSeparatorComponent={() => (
+          <View style={{ backgroundColor: "grey", height: 1, width: windowWidth}} />
+        )}
       />
     </View>
   );
@@ -40,17 +47,18 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'rgba(255, 255, 255, 1)'
       },
-      header_container: {
-        width: '100%',
-        height: 80,
+      cardContainer: {
+        width: windowWidth,
+        height: windowHeight / 10,
+        justifyContent: 'flex-start',
         flexDirection: 'row',
-        alignItems: 'center',
-        paddingLeft: 20
+        alignContent:'space-between',
+        marginHorizontal: 20
       },
-      titleText: {
-        fontSize: 20,
-        fontWeight: 'bold'
-      }
+      cardName: {
+        fontSize: 30,
+        marginLeft: 30,
+      },
 });
 
 export default Screen1;

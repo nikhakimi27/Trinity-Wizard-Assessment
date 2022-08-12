@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View, Button, TouchableOpacity} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Screen1 from './src/screen/Screen1';
@@ -12,14 +12,23 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Home"
+          name="Screen1"
           component={Screen1}
-          options={{ title: 'Screen1' }}
+          options={{ title: 'Contacts' }}
         />
-        <Stack.Screen 
-          name="Screen2" 
+        <Stack.Screen
+          name="Screen2"
           component={Screen2}
-          options={{ title: 'Screen2' }} />
+          options={{
+            title: '',
+            headerRight: () => (
+              <TouchableOpacity
+                // onPress={() => navigation.navigate('Screen1')}
+              >
+                <Text>Save</Text>
+              </TouchableOpacity>
+            ),
+          }} />
       </Stack.Navigator>
     </NavigationContainer>
   )
